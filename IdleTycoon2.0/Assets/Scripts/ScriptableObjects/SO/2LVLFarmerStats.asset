@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ee5e1bad22aa34fb64c48d1b1f6144, type: 3}
-  m_Name: FarmLevel1
+  m_Script: {fileID: 11500000, guid: adc2da8edff13b744a6c37a2f2c7337a, type: 3}
+  m_Name: 2LVLFarmerStats
   m_EditorClassIdentifier: 
-  level: 1
-  productionInterval: 2
-  grainPerCycle: 1
+  level: 2
+  moveSpeed: 20
+  harvestTime: 1
+  grainPerHarvest: 2

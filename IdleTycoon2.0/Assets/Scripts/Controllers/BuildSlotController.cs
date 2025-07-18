@@ -5,6 +5,7 @@ public class BuildSlotController : MonoBehaviour
     [SerializeField] private int requiredLevel = 1;
     [SerializeField] private PlayerLevelSystem playerLevelSystem;
     [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private EconomyController economyController;
 
     [SerializeField] private GameObject farmPrefab;
     [SerializeField] private Transform farmSpawnPoint;
@@ -45,7 +46,6 @@ public class BuildSlotController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("[BuildSlot] Clicked");
         if (!isUnlocked || IsOccupied)
         {
             return;
@@ -53,7 +53,7 @@ public class BuildSlotController : MonoBehaviour
 
         GameObject farmGO = Instantiate(farmPrefab, farmSpawnPoint.position, Quaternion.identity);
         currentFarm = farmGO.GetComponent<FarmController>();
-        currentFarm.Initialize(storagePoint, playerLevelSystem, inventoryController);
+        currentFarm.Initialize(storagePoint, playerLevelSystem, inventoryController, economyController);
 
         IsOccupied = true;
         Debug.Log($"[BuildSlot] Farm built at slot (requiredLevel = {requiredLevel})");
