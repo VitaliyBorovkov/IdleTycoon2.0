@@ -430,8 +430,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -1193445625, guid: f1c22e927cb0fda47b2f7dfda32d8529, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -793,8 +793,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 7374073399454954729}
   farmerBotPrefab: {fileID: 1032656621309333750, guid: 3cf57bace2d13e047ae4ff05685b1932, type: 3}
-  levelSettings: {fileID: 11400000, guid: ffa43aec79b36ca46957e96d92eec1af, type: 2}
-  playerLevelSystem: {fileID: 0}
+  farmSettings: {fileID: 11400000, guid: 9844f37e234b40940a2305f9ce5f4188, type: 2}
+  upgradeButton: {fileID: 3934462532323851989}
 --- !u!65 &1593423611888604256
 BoxCollider:
   m_ObjectHideFlags: 0

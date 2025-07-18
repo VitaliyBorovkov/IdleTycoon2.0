@@ -3,7 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FarmLevelSettings", menuName = "Settings/Farm Level Settings")]
 public class FarmLevelSettings : ScriptableObject
 {
-    public int level = 1;
-    public float productionInterval = 2f;
-    public int grainPerCycle = 1;
+    public FarmLevelEntry[] levels;
+}
+
+[System.Serializable]
+public class FarmLevelEntry
+{
+    public int level;
+    public float productionInterval;
+    public int grainPerCycle;
+    public int buildCost;
+    public int upgradeCost;
 }
