@@ -4,7 +4,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private EconomyController economyController;
     [SerializeField] private InventoryController inventoryController;
+
     [SerializeField] private EconomyUIController economyUIController;
+
     [SerializeField] private Transform storagePoint;
 
     private void Start()
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
 
         economyController.Initialize();
         inventoryController.Initialize();
+
         economyUIController.Initialize();
+
     }
 }

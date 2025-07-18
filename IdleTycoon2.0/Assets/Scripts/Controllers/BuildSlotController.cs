@@ -7,6 +7,7 @@ public class BuildSlotController : MonoBehaviour
     [SerializeField] private InventoryController inventoryController;
     [SerializeField] private EconomyController economyController;
 
+
     [SerializeField] private GameObject farmPrefab;
     [SerializeField] private Transform farmSpawnPoint;
     [SerializeField] private Transform storagePoint;
