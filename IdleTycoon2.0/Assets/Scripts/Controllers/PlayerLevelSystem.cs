@@ -19,12 +19,14 @@ public class PlayerLevelSystem : MonoBehaviour
         model = new PlayerLevelModel(settings);
     }
 
+
     private void Start()
     {
         // Временно устанавливаем 95 XP на 1 уровне
         model.SetLevel(1, 75);
         Debug.Log($"[PlayerLevel] TEMP: XP manually set to {CurrentXP} at Level {CurrentLevel}");
     }
+
 
     public void AddXP(int amount)
     {
@@ -43,7 +45,9 @@ public class PlayerLevelSystem : MonoBehaviour
 
     public int XPToNextLevel()
     {
+
         return model.XPToNextLevel();
+
     }
 
     public int GetRequiredXPForNextLevel()

@@ -61,26 +61,32 @@ public class FarmerBotController : MonoBehaviour
     {
         while (true)
         {
+
             yield return new WaitForSeconds(currentStats.harvestTime);
 
             Debug.Log($"[FarmerBot] Produced {currentStats.grainPerHarvest} grain(s). Moving to storage...");
+
 
             yield return StartCoroutine(MoveTo(storagePoint.position));
 
             yield return new WaitForSeconds(0.5f);
             Debug.Log($"[FarmerBot] Delivered to storage.");
             playerLevelSystem.AddXP(5);
+
             inventory.Add(ItemType.Grain, currentStats.grainPerHarvest);
             yield return StartCoroutine(MoveTo(startPoint));
         }
+
     }
 
     private IEnumerator MoveTo(Vector3 target)
     {
         while (Vector3.Distance(transform.position, target) > 0.05f)
         {
+
             transform.position = Vector3.MoveTowards(transform.position, target, currentStats.moveSpeed *
                 Time.deltaTime);
+
             yield return null;
         }
     }

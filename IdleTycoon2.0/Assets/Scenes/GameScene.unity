@@ -979,6 +979,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyText: {fileID: 1987863640}
+
+
 --- !u!4 &897929766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4266185278362394372, guid: 58e0d85a834fdc549b428a427a60b3ef, type: 3}
