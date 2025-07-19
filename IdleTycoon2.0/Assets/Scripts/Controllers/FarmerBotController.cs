@@ -48,7 +48,7 @@ public class FarmerBotController : MonoBehaviour
         return statsDatabase.levels[level - 1];
     }
 
-    public void UpgradeStats(int newLevel) //upgrade farmer to farm for future
+    public void UpgradeStats(int newLevel)
     {
         currentStats = GetStatsForLevel(newLevel);
         if (currentStats == null)

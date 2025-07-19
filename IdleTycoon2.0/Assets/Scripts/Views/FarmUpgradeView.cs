@@ -29,6 +29,6 @@ public class FarmUpgradeView : MonoBehaviour
 
     public void SetCost(int cost)
     {
-        costText.text = $"Upgrade ({cost}$)";
+        costText.text = $"Upgrade ({cost})";
     }
 }

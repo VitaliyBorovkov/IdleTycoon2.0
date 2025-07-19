@@ -8,6 +8,6 @@ public class MoneyView : MonoBehaviour
 
     public void UpdateMoney(int amount)
     {
-        moneyText.text = $"Money: {amount}$";
+        moneyText.text = $"Money: {amount}";
     }
 }

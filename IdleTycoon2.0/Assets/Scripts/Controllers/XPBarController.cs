@@ -30,7 +30,6 @@ public class XPBarController : MonoBehaviour
     {
         int totalXP = levelSystem.CurrentXP;
         int requiredXP = levelSystem.RequiredXPForCurrentLevel();
-        //int currentXP = levelSystem.CurrentXPInLevel();
         view.UpdateXPBar(totalXP, requiredXP);
     }
 
