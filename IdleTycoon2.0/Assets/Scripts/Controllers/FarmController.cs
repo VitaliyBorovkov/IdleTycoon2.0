@@ -12,6 +12,7 @@ public class FarmController : MonoBehaviour
     private InventoryController inventory;
     private EconomyController economy;
 
+
     private FarmModel model;
     private FarmerBotController farmerBot;
 
@@ -26,7 +27,6 @@ public class FarmController : MonoBehaviour
         this.inventory = inventory;
         this.economy = economy;
         this.farmSettings = farmSettings;
-
 
         if (playerLevelSystem.CurrentLevel < farmSettings.RequiredPlayerLevelForBuild)
         {
@@ -74,7 +74,6 @@ public class FarmController : MonoBehaviour
         upgradeView.SetButtonVisible(canUpgrade);
         upgradeView.SetButtonInteractable(canUpgrade);
         upgradeView.SetCost(farmSettings.UpgradeCost);
-
     }
 
     private void HandleUpgradeClick()
@@ -103,6 +102,5 @@ public class FarmController : MonoBehaviour
         Debug.Log($"[Farm] Farm upgraded to level {model.Level}");
 
         UpdateUpgradeUI();
-
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FarmSettings", menuName = "ScriptableObjects/Farm/FarmSettings", order = 1)]
-
 public class FarmSettings : ScriptableObject
 {
     [Header("Build")]
