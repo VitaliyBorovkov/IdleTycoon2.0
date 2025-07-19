@@ -45,9 +45,7 @@ public class PlayerLevelSystem : MonoBehaviour
 
     public int XPToNextLevel()
     {
-
         return model.XPToNextLevel();
-
     }
 
     public int GetRequiredXPForNextLevel()

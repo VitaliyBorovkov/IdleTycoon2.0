@@ -13,7 +13,7 @@ public class EconomyController : MonoBehaviour
     public void Initialize()
     {
         model = new EconomyModel(startMoney: 1000);
-        Debug.Log($"[Economy] Game started with ${model.Money}");
+        Debug.Log($"[Economy] Game started with {model.Money}");
 
         OnMoneyChanged?.Invoke(model.Money);
 
