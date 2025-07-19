@@ -10,5 +10,6 @@ public class FarmModel
     public void Upgrade()
     {
         Level++;
+
     }
 }
