@@ -28,14 +28,30 @@ public class PlayerLevelModel
         return levelUp;
     }
 
+    //public int XPToNextLevel()
+    //{
+    //    if (CurrentLevel >= xpToNextLevel.Length)
+    //    {
+    //        return 0;
+    //    }
+
+    //    return xpToNextLevel[CurrentLevel] - CurrentXP;
+    //}
+
     public int XPToNextLevel()
     {
-        if (CurrentLevel >= xpToNextLevel.Length)
-        {
+        if (IsMaxLevel())
             return 0;
-        }
 
-        return xpToNextLevel[CurrentLevel] - CurrentXP;
+        return xpToNextLevel[CurrentLevel] - xpToNextLevel[CurrentLevel - 1];
+    }
+
+    public int CurrentXPInLevel()
+    {
+        if (CurrentLevel == 0)
+            return CurrentXP;
+
+        return CurrentXP - xpToNextLevel[CurrentLevel - 1];
     }
 
     public void SetLevel(int level, int xp)
@@ -47,5 +63,13 @@ public class PlayerLevelModel
     public bool IsMaxLevel()
     {
         return CurrentLevel >= xpToNextLevel.Length;
+    }
+
+    public int RequiredXPForCurrentLevel()
+    {
+        if (CurrentLevel >= xpToNextLevel.Length)
+            return xpToNextLevel[xpToNextLevel.Length - 1];
+
+        return xpToNextLevel[CurrentLevel];
     }
 }

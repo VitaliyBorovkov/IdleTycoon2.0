@@ -10,21 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77ee5e1bad22aa34fb64c48d1b1f6144, type: 3}
-  m_Name: FarmLevel
+  m_Name: FarmSettingsDatabase
   m_EditorClassIdentifier: 
   levels:
-  - level: 1
-    productionInterval: 2.5
-    grainPerCycle: 1
-    buildCost: 100
-    upgradeCost: 250
-  - level: 3
-    productionInterval: 1.5
-    grainPerCycle: 2
-    buildCost: 300
-    upgradeCost: 500
-  - level: 5
-    productionInterval: 0.5
-    grainPerCycle: 3
-    buildCost: 600
-    upgradeCost: 850
+  - {fileID: 11400000, guid: 43c578469e53f864db4bf6fec2f50cf7, type: 2}
+  - {fileID: 11400000, guid: e006b4fe47b57334caa87d59b9fea9c7, type: 2}
+  - {fileID: 11400000, guid: c53dfb31a62fb0246985139e5951750d, type: 2}

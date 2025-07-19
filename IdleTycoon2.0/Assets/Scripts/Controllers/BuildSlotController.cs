@@ -3,10 +3,13 @@ using UnityEngine;
 public class BuildSlotController : MonoBehaviour
 {
     [SerializeField] private int requiredLevel = 1;
+    [SerializeField] private int farmIndex = 0;
+
     [SerializeField] private PlayerLevelSystem playerLevelSystem;
     [SerializeField] private InventoryController inventoryController;
     [SerializeField] private EconomyController economyController;
 
+    [SerializeField] private FarmSettingsDatabase settingsDatabase;
     [SerializeField] private GameObject farmPrefab;
     [SerializeField] private Transform farmSpawnPoint;
     [SerializeField] private Transform storagePoint;
@@ -51,9 +54,17 @@ public class BuildSlotController : MonoBehaviour
             return;
         }
 
+        if (farmIndex >= settingsDatabase.levels.Length)
+        {
+            Debug.LogError($"[BuildSlot] Invalid farmIndex: {farmIndex}");
+            return;
+        }
+
+        var farmSettings = settingsDatabase.levels[farmIndex];
+
         GameObject farmGO = Instantiate(farmPrefab, farmSpawnPoint.position, Quaternion.identity);
         currentFarm = farmGO.GetComponent<FarmController>();
-        currentFarm.Initialize(storagePoint, playerLevelSystem, inventoryController, economyController);
+        currentFarm.Initialize(storagePoint, playerLevelSystem, inventoryController, economyController, farmSettings);
 
         IsOccupied = true;
         Debug.Log($"[BuildSlot] Farm built at slot (requiredLevel = {requiredLevel})");

@@ -341,8 +341,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1742018486943174283}
+  - component: {fileID: 5367673532646588048}
   m_Layer: 6
-  m_Name: FarmUpgradeUI
+  m_Name: FarmUpgradeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,6 +364,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 83120131508621762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5367673532646588048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581941789905935568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e14ad119e9981c4cbc9b7668f3033a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeButton: {fileID: 3934462532323851989}
+  costText: {fileID: 6040171693741345460}
 --- !u!1 &5273379813878238014
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +809,7 @@ MonoBehaviour:
   view: {fileID: 7374073399454954729}
   farmerBotPrefab: {fileID: 1032656621309333750, guid: 3cf57bace2d13e047ae4ff05685b1932, type: 3}
   farmSettings: {fileID: 11400000, guid: 9844f37e234b40940a2305f9ce5f4188, type: 2}
-  upgradeButton: {fileID: 3934462532323851989}
+  upgradeView: {fileID: 5367673532646588048}
 --- !u!65 &1593423611888604256
 BoxCollider:
   m_ObjectHideFlags: 0
