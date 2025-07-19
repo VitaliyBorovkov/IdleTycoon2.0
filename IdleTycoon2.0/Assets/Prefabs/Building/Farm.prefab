@@ -447,7 +447,6 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -1193445625, guid: f1c22e927cb0fda47b2f7dfda32d8529, type: 3}
   m_Type: 0
-
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -752,7 +751,6 @@ GameObject:
   - component: {fileID: 83120131508621762}
   - component: {fileID: 7374073399454954729}
   - component: {fileID: 3435138280182763970}
-
   - component: {fileID: 1593423611888604256}
   m_Layer: 6
   m_Name: Farm
@@ -770,9 +768,7 @@ Transform:
   m_GameObject: {fileID: 6775909277094573193}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0020608306, z: -0, w: -0.9999979}
-
   m_LocalPosition: {x: -0.68, y: 0.0000009536743, z: -6.15}
-
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -812,7 +808,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 7374073399454954729}
   farmerBotPrefab: {fileID: 1032656621309333750, guid: 3cf57bace2d13e047ae4ff05685b1932, type: 3}
-
   farmSettings: {fileID: 11400000, guid: 9844f37e234b40940a2305f9ce5f4188, type: 2}
   upgradeView: {fileID: 5367673532646588048}
 --- !u!65 &1593423611888604256

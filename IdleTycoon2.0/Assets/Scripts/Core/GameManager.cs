@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
         inventoryController.Initialize();
 
         economyUIController.Initialize();
-
         xpBarController.Initialize(playerLevelSystem);
     }
 }
