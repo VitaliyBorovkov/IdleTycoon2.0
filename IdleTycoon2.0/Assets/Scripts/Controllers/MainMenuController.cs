@@ -6,7 +6,7 @@ public class MainMenuController : MonoBehaviour
     public void OnPlayClicked()
     {
         Debug.Log("[MainMenu] Play button clicked. Loading GameScene...");
-        SceneManager.LoadScene("GameScene"); // убедись, что GameScene добавлена в Build Settings
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnExitClicked()

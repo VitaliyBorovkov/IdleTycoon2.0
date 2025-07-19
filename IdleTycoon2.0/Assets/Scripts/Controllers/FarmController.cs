@@ -1,15 +1,13 @@
 using UnityEngine;
 
-using UnityEngine.UI;
-
 
 public class FarmController : MonoBehaviour
 {
     [SerializeField] private FarmView view;
     [SerializeField] private GameObject farmerBotPrefab;
-    [SerializeField] private FarmSettings farmSettings;
-    [SerializeField] private Button upgradeButton;
+    [SerializeField] private FarmUpgradeView upgradeView;
 
+    private FarmSettings farmSettings;
     private PlayerLevelSystem playerLevelSystem;
     private InventoryController inventory;
     private EconomyController economy;
@@ -22,16 +20,17 @@ public class FarmController : MonoBehaviour
     public int GetRequiredPlayerLevelForUpgrade() => farmSettings.RequiredPlayerLevelForUpgrade;
 
     public void Initialize(Transform storagePoint, PlayerLevelSystem playerLevelSystem, InventoryController inventory,
-        EconomyController economy)
+        EconomyController economy, FarmSettings farmSettings)
     {
         this.playerLevelSystem = playerLevelSystem;
         this.inventory = inventory;
         this.economy = economy;
+        this.farmSettings = farmSettings;
+
 
         if (playerLevelSystem.CurrentLevel < farmSettings.RequiredPlayerLevelForBuild)
         {
             Debug.LogWarning($"Player level too low to build this farm. Required: {farmSettings.RequiredPlayerLevelForBuild}");
-            Destroy(gameObject);
             return;
         }
 
@@ -39,16 +38,21 @@ public class FarmController : MonoBehaviour
         if (!economy.TrySpendMoney(farmSettings.BuildCost))
         {
             Debug.LogWarning("Not enough money to build farm");
-            Destroy(gameObject);
             return;
         }
 
         model = new FarmModel();
-        SpawnFarmerBot(storagePoint, playerLevelSystem);
-        InitializeUpgradeButton();
+        SpawnFarmerBot(storagePoint);
+
+        upgradeView.Initialize();
+        upgradeView.OnUpgradeClicked += HandleUpgradeClick;
+        UpdateUpgradeUI();
+
+        playerLevelSystem.OnLevelUp += _ => UpdateUpgradeUI();
+        economy.OnMoneyChanged += _ => UpdateUpgradeUI();
     }
 
-    private void SpawnFarmerBot(Transform storagePoint, PlayerLevelSystem playerLevelSystem)
+    private void SpawnFarmerBot(Transform storagePoint)
     {
         if (farmerBotPrefab == null)
         {
@@ -61,33 +65,16 @@ public class FarmController : MonoBehaviour
         farmerBot.Initialize(storagePoint, model, playerLevelSystem, inventory);
     }
 
-    private void InitializeUpgradeButton()
+    private void UpdateUpgradeUI()
     {
-        if (upgradeButton == null)
-        {
-            Debug.LogWarning("Upgrade button is not assigned.");
-            return;
-        }
+        bool canUpgrade =
+            model.Level < farmSettings.MaxFarmLevel &&
+            playerLevelSystem.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
 
-        upgradeButton.onClick.AddListener(HandleUpgradeClick);
-        upgradeButton.interactable = playerLevelSystem.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
-        playerLevelSystem.OnLevelUp += _ => UpdateUpgradeButtonState();
-    }
+        upgradeView.SetButtonVisible(canUpgrade);
+        upgradeView.SetButtonInteractable(canUpgrade);
+        upgradeView.SetCost(farmSettings.UpgradeCost);
 
-    private void UpdateUpgradeButtonState()
-    {
-        //  if (upgradeButton == null)
-        //  {
-        //      return;
-        //  }
-
-        //  bool canUpgrade =
-        //model.Level < farmSettings.MaxFarmLevel &&
-        //playerLevelSystem.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
-
-        upgradeButton.gameObject.SetActive(/*canUpgrade*/true);
-
-        //upgradeButton.interactable = playerLevelSystem.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
     }
 
     private void HandleUpgradeClick()
@@ -115,6 +102,7 @@ public class FarmController : MonoBehaviour
 
         Debug.Log($"[Farm] Farm upgraded to level {model.Level}");
 
-        UpdateUpgradeButtonState();
+        UpdateUpgradeUI();
+
     }
 }
