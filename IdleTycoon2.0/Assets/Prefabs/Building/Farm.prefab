@@ -364,6 +364,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 83120131508621762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+
 --- !u!114 &5367673532646588048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeButton: {fileID: 3934462532323851989}
   costText: {fileID: 6040171693741345460}
+
 --- !u!1 &5273379813878238014
 GameObject:
   m_ObjectHideFlags: 0

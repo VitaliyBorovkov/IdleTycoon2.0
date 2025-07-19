@@ -346,6 +346,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276782601}
   m_CullTransparentMesh: 1
+
 --- !u!1 &348119571
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +778,7 @@ MonoBehaviour:
   inventoryController: {fileID: 1561494864}
   economyController: {fileID: 62916534}
   settingsDatabase: {fileID: 11400000, guid: 1484a257dc14d0544a26a37e3215ebf8, type: 2}
+
   farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   farmSpawnPoint: {fileID: 706934817}
   storagePoint: {fileID: 897929766}
@@ -1175,6 +1177,7 @@ MonoBehaviour:
   inventoryController: {fileID: 1561494864}
   economyController: {fileID: 62916534}
   settingsDatabase: {fileID: 11400000, guid: 1484a257dc14d0544a26a37e3215ebf8, type: 2}
+
   farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   farmSpawnPoint: {fileID: 1035577395}
   storagePoint: {fileID: 897929766}
@@ -1574,6 +1577,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528843654}
   m_CullTransparentMesh: 1
+
 --- !u!1 &1561494863
 GameObject:
   m_ObjectHideFlags: 0
