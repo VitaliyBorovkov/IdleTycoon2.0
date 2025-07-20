@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510db37add0a46a4f97f76884872cd68, type: 3}
-  m_Name: 1FarmSettings
+  m_Script: {fileID: 11500000, guid: d8cf1b475207ac64eb5d0d159a8d8afd, type: 3}
+  m_Name: MillSettings
   m_EditorClassIdentifier: 
-  BuildCost: 100
-  RequiredPlayerLevelForBuild: 1
-  UpgradeCost: 250
-  RequiredPlayerLevelForUpgrade: 2
-  MaxFarmLevel: 2
+  grainPerBatch: 3
+  flourPerBatch: 2
+  craftTime: 2

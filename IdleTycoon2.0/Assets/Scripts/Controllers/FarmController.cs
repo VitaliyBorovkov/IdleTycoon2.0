@@ -20,7 +20,7 @@ public class FarmController : MonoBehaviour
     public int GetUpgradeCost() => farmSettings.UpgradeCost;
     public int GetRequiredPlayerLevelForUpgrade() => farmSettings.RequiredPlayerLevelForUpgrade;
 
-    public void Initialize(Transform storagePoint, PlayerLevelSystem playerLevelSystem, InventoryController inventory,
+    public void Initialize(Transform millPoint, PlayerLevelSystem playerLevelSystem, InventoryController inventory,
         EconomyController economy, FarmSettings farmSettings)
     {
         this.playerLevelSystem = playerLevelSystem;
@@ -42,7 +42,7 @@ public class FarmController : MonoBehaviour
         }
 
         model = new FarmModel();
-        SpawnFarmerBot(storagePoint);
+        SpawnFarmerBot(millPoint);
 
         upgradeView.Initialize();
         upgradeView.OnUpgradeClicked += HandleUpgradeClick;
@@ -52,7 +52,7 @@ public class FarmController : MonoBehaviour
         economy.OnMoneyChanged += _ => UpdateUpgradeUI();
     }
 
-    private void SpawnFarmerBot(Transform storagePoint)
+    private void SpawnFarmerBot(Transform millPoint)
     {
         if (farmerBotPrefab == null)
         {
@@ -62,7 +62,7 @@ public class FarmController : MonoBehaviour
 
         GameObject botGO = Instantiate(farmerBotPrefab, view.GetBotSpawnPoint().position, Quaternion.identity);
         farmerBot = botGO.GetComponent<FarmerBotController>();
-        farmerBot.Initialize(storagePoint, model, playerLevelSystem, inventory);
+        farmerBot.Initialize(millPoint, model, playerLevelSystem, inventory);
     }
 
     private void UpdateUpgradeUI()
