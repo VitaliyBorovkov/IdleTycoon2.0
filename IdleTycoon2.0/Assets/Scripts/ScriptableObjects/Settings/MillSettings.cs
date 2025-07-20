@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MillSettings", menuName = "ScriptableObjects/Mill Settings")]
+[CreateAssetMenu(fileName = "MillSettings", menuName = "ScriptableObjects/Mill/Mill Settings")]
 public class MillSettings : ScriptableObject
 {
     public int grainPerBatch = 3;

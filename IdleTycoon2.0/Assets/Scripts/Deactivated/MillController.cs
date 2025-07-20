@@ -13,7 +13,7 @@ public class MillController : MonoBehaviour
         this.inventoryService = inventoryService;
         model = new MillModel();
 
-        StartCoroutine(ProcessingLoop());
+        //StartCoroutine(ProcessingLoop());
     }
 
     private IEnumerator ProcessingLoop()

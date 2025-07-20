@@ -238,7 +238,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5576223081995218053}
-  - component: {fileID: 3005694761890717675}
   m_Layer: 0
   m_Name: Mill
   m_TagString: Untagged
@@ -265,19 +264,6 @@ Transform:
   - {fileID: 6543460084448138802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3005694761890717675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6735934552581343915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472a907a915a2df419489dcba3b8b5af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: ff0d2013272e28b4787d10c0d3145f50, type: 2}
 --- !u!1 &6746262540255392323
 GameObject:
   m_ObjectHideFlags: 0
