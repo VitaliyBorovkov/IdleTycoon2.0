@@ -9,7 +9,8 @@ public class BuildSlotController : MonoBehaviour
     [SerializeField] private MonoBehaviour inventoryServiceSource;
     [SerializeField] private MonoBehaviour economyServiceSource;
 
-    [SerializeField] private FarmSettingsDatabase settingsDatabase;
+    //[SerializeField] private FarmSettingsDatabase settingsDatabase;
+    [SerializeField] private FarmSettings farmSettings;
     [SerializeField] private GameObject farmPrefab;
     [SerializeField] private Transform farmSpawnPoint;
     [SerializeField] private Transform millPoint;
@@ -61,13 +62,25 @@ public class BuildSlotController : MonoBehaviour
             return;
         }
 
-        if (farmIndex >= settingsDatabase.levels.Length)
+        if (/*farmIndex >= settingsDatabase.levels.Length*/farmSettings == null)
         {
             Debug.LogError($"[BuildSlot] Invalid farmIndex: {farmIndex}");
             return;
         }
 
-        var farmSettings = settingsDatabase.levels[farmIndex];
+        if (playerLevelService.CurrentLevel < farmSettings.RequiredPlayerLevelForBuild)
+        {
+            Debug.LogWarning($"[BuildSlot] Not enough level to build farm. Required: {farmSettings.RequiredPlayerLevelForBuild}");
+            return;
+        }
+
+        if (!economyService.TrySpendMoney(farmSettings.BuildCost))
+        {
+            Debug.LogWarning("[BuildSlot] Not enough money to build farm.");
+            return;
+        }
+
+        //var farmSettings = settingsDatabase.levels[farmIndex];
 
         GameObject farmGO = Instantiate(farmPrefab, farmSpawnPoint.position, Quaternion.identity);
         currentFarm = farmGO.GetComponent<FarmController>();

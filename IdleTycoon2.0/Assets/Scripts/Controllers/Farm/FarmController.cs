@@ -17,8 +17,6 @@ public class FarmController : MonoBehaviour
     private FarmerBotController farmerBot;
 
     public FarmSettings GetSettings() => farmSettings;
-    public int GetUpgradeCost() => farmSettings.UpgradeCost;
-    public int GetRequiredPlayerLevelForUpgrade() => farmSettings.RequiredPlayerLevelForUpgrade;
 
     public void Initialize(Transform millPoint, IPlayerLevelService playerLevelService, IInventoryService inventoryService,
         IEconomyService economyService, FarmSettings farmSettings)
@@ -35,11 +33,11 @@ public class FarmController : MonoBehaviour
         }
 
 
-        if (!economyService.TrySpendMoney(farmSettings.BuildCost))
-        {
-            Debug.LogWarning("Not enough money to build farm");
-            return;
-        }
+        //if (!economyService.TrySpendMoney(farmSettings.BuildCost))
+        //{
+        //    Debug.LogWarning("Not enough money to build farm");
+        //    return;
+        //}
 
         model = new FarmModel();
         SpawnFarmerBot(millPoint);
@@ -65,41 +63,45 @@ public class FarmController : MonoBehaviour
         farmerBot.Initialize(millPoint, model, playerLevelService, inventoryService);
     }
 
-    //private void UpdateUpgradeUI()
-    //{
-    //    bool canUpgrade =
-    //        model.Level < farmSettings.MaxFarmLevel &&
-    //        playerLevelService.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
-
-    //    upgradeView.SetButtonVisible(canUpgrade);
-    //    upgradeView.SetButtonInteractable(canUpgrade);
-    //    upgradeView.SetCost(farmSettings.UpgradeCost);
-    //}
-
     private void UpdateUpgradeUI()
     {
-        bool levelEnough = playerLevelService.CurrentLevel >= farmSettings.RequiredPlayerLevelForUpgrade;
-        bool moneyEnough = economyService.GetMoney() >= farmSettings.UpgradeCost;
-        bool notMaxLevel = model.Level < farmSettings.MaxFarmLevel;
+        if (model.Level >= farmSettings.MaxFarmLevel)
+        {
+            upgradeView.SetButtonVisible(false);
+            return;
+        }
 
-        bool showButton = notMaxLevel && (levelEnough || moneyEnough);
-        bool enableButton = notMaxLevel && levelEnough && moneyEnough;
+        var next = GetNextLevelSettings();
+
+        bool levelEnough = playerLevelService.CurrentLevel >= next.requiredPlayerLevel;
+        bool moneyEnough = economyService.GetMoney() >= next.upgradeCost;
+
+        bool showButton = levelEnough /*|| moneyEnough*/;
+        bool enableButton = levelEnough && moneyEnough;
 
         upgradeView.SetButtonVisible(showButton);
         upgradeView.SetButtonInteractable(enableButton);
-        upgradeView.SetCost(farmSettings.UpgradeCost);
+        upgradeView.SetCost(next.upgradeCost);
     }
 
 
     private void HandleUpgradeClick()
     {
-        if (playerLevelService.CurrentLevel < farmSettings.RequiredPlayerLevelForUpgrade)
+        if (model.Level >= farmSettings.MaxFarmLevel)
+        {
+            Debug.Log("[Farm] Max level reached.");
+            return;
+        }
+
+        var next = GetNextLevelSettings();
+
+        if (playerLevelService.CurrentLevel < next.requiredPlayerLevel)
         {
             Debug.Log("[Farm] Player level too low to upgrade.");
             return;
         }
 
-        if (!economyService.TrySpendMoney(farmSettings.UpgradeCost))
+        if (!economyService.TrySpendMoney(next.upgradeCost))
         {
             Debug.Log("[Farm] Not enough money to upgrade.");
             return;
@@ -118,4 +120,10 @@ public class FarmController : MonoBehaviour
 
         UpdateUpgradeUI();
     }
+
+    private FarmLevelSettings GetNextLevelSettings()
+    {
+        return farmSettings.GetNextLevelSettings(model.Level);
+    }
+
 }

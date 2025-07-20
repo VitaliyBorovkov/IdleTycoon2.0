@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildCost: 100
   RequiredPlayerLevelForBuild: 1
-  UpgradeCost: 250
-  RequiredPlayerLevelForUpgrade: 2
-  MaxFarmLevel: 3
+  levels:
+  - level: 2
+    upgradeCost: 250
+    requiredPlayerLevel: 2
+  - level: 3
+    upgradeCost: 350
+    requiredPlayerLevel: 3

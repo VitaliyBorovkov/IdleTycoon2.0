@@ -39,13 +39,13 @@ public class FarmerBotController : MonoBehaviour
 
     private FarmerStats GetStatsForLevel(int level)
     {
-        if (statsDatabase.levels == null || statsDatabase.levels.Length < level)
+        if (statsDatabase.levels == null || level < 0 || level >= statsDatabase.levels.Length)
         {
             Debug.LogError($"[FarmerBot] Stats not found for level {level}");
             return null;
         }
 
-        return statsDatabase.levels[level - 1];
+        return statsDatabase.levels[level];
     }
 
     public void UpgradeStats(int newLevel)

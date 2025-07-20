@@ -23,8 +23,8 @@ public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
     private void Start()
     {
         // Временно устанавливаем 95 XP на 1 уровне
-        model.SetLevel(4, 990);
-        Debug.Log($"[PlayerLevel] TEMP: XP manually set to {CurrentXP} at Level {CurrentLevel}");
+        //model.SetLevel(4, 990);
+        //Debug.Log($"[PlayerLevel] TEMP: XP manually set to {CurrentXP} at Level {CurrentLevel}");
     }
 
 
