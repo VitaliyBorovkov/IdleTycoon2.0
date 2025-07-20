@@ -3,13 +3,17 @@ using UnityEngine;
 public class PlayerLevelController : MonoBehaviour
 {
     [SerializeField] private PlayerLevelView view;
-    [SerializeField] private PlayerLevelSystem playerLevelSystem;
+    [SerializeField] private MonoBehaviour playerLevelServiceSource;
+
+    private IPlayerLevelService playerLevelService;
 
     private void Start()
     {
-        view.SetLevel(playerLevelSystem.CurrentLevel);
+        playerLevelService = playerLevelServiceSource as IPlayerLevelService;
 
-        playerLevelSystem.OnLevelUp += HandleLevelUp;
+        view.SetLevel(playerLevelService.CurrentLevel);
+
+        playerLevelService.OnLevelUp += HandleLevelUp;
     }
 
     private void HandleLevelUp(int newLevel)
@@ -19,6 +23,6 @@ public class PlayerLevelController : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerLevelSystem.OnLevelUp -= HandleLevelUp;
+        playerLevelService.OnLevelUp -= HandleLevelUp;
     }
 }

@@ -4,9 +4,9 @@ public class XPBarController : MonoBehaviour
 {
     [SerializeField] private XPBarView view;
 
-    private PlayerLevelSystem levelSystem;
+    private IPlayerLevelService levelSystem;
 
-    public void Initialize(PlayerLevelSystem levelSystem)
+    public void Initialize(IPlayerLevelService levelSystem)
     {
         this.levelSystem = levelSystem;
 

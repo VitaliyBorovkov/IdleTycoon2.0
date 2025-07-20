@@ -2,16 +2,15 @@ using System;
 
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryService : MonoBehaviour, IInventoryService
 {
     private InventoryModel model;
 
-    public event Action<ItemType, int> OnInventoryChanged;
+    public event Action OnInventoryChanged;
 
     public void Initialize()
     {
         model = new InventoryModel();
-        Debug.Log("[Inventory] Initialized");
     }
 
     public int GetAmount(ItemType type)
@@ -23,7 +22,7 @@ public class InventoryController : MonoBehaviour
     {
         model.Add(type, amount);
         Debug.Log($"[Inventory] +{amount} {type} (Total: {model.GetAmount(type)})");
-        OnInventoryChanged?.Invoke(type, model.GetAmount(type));
+        OnInventoryChanged?.Invoke();
     }
 
     public bool TryConsume(ItemType type, int amount)
@@ -32,7 +31,7 @@ public class InventoryController : MonoBehaviour
         if (success)
         {
             Debug.Log($"[Inventory] -{amount} {type} (Left: {model.GetAmount(type)})");
-            OnInventoryChanged?.Invoke(type, model.GetAmount(type));
+            OnInventoryChanged?.Invoke();
         }
         else
         {

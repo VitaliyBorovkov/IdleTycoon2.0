@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private EconomyController economyController;
-    [SerializeField] private InventoryController inventoryController;
+    [SerializeField] private EconomyService economyService;
+    [SerializeField] private InventoryService inventoryService;
     [SerializeField] private EconomyUIController economyUIController;
     [SerializeField] private MillController millController;
-    [SerializeField] private PlayerLevelSystem playerLevelSystem;
+    [SerializeField] private PlayerLevelService playerLevelService;
     [SerializeField] private XPBarController xpBarController;
+    [SerializeField] private InventoryPanelController inventoryPanelController;
+    [SerializeField] private BakeryController bakeryController;
+    [SerializeField] private BreadSellController breadSellController;
 
     private void Start()
     {
@@ -16,10 +19,13 @@ public class GameManager : MonoBehaviour
 
     private void Initialize()
     {
-        economyController.Initialize();
-        inventoryController.Initialize();
+        economyService.Initialize();
+        inventoryService.Initialize();
         economyUIController.Initialize();
-        xpBarController.Initialize(playerLevelSystem);
-        millController.Initialize(inventoryController);
+        xpBarController.Initialize(playerLevelService);
+        millController.Initialize(inventoryService);
+        inventoryPanelController.Initialize();
+        bakeryController.Initialize(inventoryService);
+        breadSellController.Initialize(inventoryService, economyService, playerLevelService);
     }
 }

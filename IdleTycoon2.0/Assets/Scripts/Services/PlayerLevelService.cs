@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-public class PlayerLevelSystem : MonoBehaviour
+public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
 {
     [SerializeField] private PlayerLevelSettings settings;
 
@@ -23,7 +23,7 @@ public class PlayerLevelSystem : MonoBehaviour
     private void Start()
     {
         // Временно устанавливаем 95 XP на 1 уровне
-        model.SetLevel(1, 75);
+        model.SetLevel(4, 990);
         Debug.Log($"[PlayerLevel] TEMP: XP manually set to {CurrentXP} at Level {CurrentLevel}");
     }
 

@@ -7,19 +7,19 @@ public class FarmerBotController : MonoBehaviour
     [SerializeField] private FarmerStatsDatabase statsDatabase;
 
     private Transform millPoint;
-    private PlayerLevelSystem playerLevelSystem;
-    private InventoryController inventory;
+    private IPlayerLevelService playerLevelService;
+    private IInventoryService inventoryService;
     private FarmerStats currentStats;
     private FarmModel farmModel;
 
     private Vector3 startPoint;
 
-    public void Initialize(Transform millPoint, FarmModel farmModel, PlayerLevelSystem playerLevelSystem,
-        InventoryController inventory)
+    public void Initialize(Transform millPoint, FarmModel farmModel, IPlayerLevelService playerLevelService,
+        IInventoryService inventoryService)
     {
         this.millPoint = millPoint;
-        this.playerLevelSystem = playerLevelSystem;
-        this.inventory = inventory;
+        this.playerLevelService = playerLevelService;
+        this.inventoryService = inventoryService;
         this.farmModel = farmModel;
 
         startPoint = transform.position;
@@ -71,9 +71,9 @@ public class FarmerBotController : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
             Debug.Log($"[FarmerBot] Delivered to mill.");
-            playerLevelSystem.AddXP(5);
+            playerLevelService.AddXP(5);
 
-            inventory.Add(ItemType.Grain, currentStats.grainPerHarvest);
+            inventoryService.Add(ItemType.Grain, currentStats.grainPerHarvest);
             yield return StartCoroutine(MoveTo(startPoint));
         }
 

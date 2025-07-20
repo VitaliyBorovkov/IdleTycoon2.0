@@ -30,16 +30,6 @@ public class PlayerLevelModel
         return levelUp;
     }
 
-    //public int XPToNextLevel()
-    //{
-    //    if (CurrentLevel >= xpToNextLevel.Length)
-    //    {
-    //        return 0;
-    //    }
-
-    //    return xpToNextLevel[CurrentLevel] - CurrentXP;
-    //}
-
     public int XPToNextLevel()
     {
         if (IsMaxLevel())

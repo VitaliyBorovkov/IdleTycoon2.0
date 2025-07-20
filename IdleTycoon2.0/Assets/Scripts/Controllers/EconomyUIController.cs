@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class EconomyUIController : MonoBehaviour
 {
-    [SerializeField] private EconomyController economy;
+    [SerializeField] private MonoBehaviour economyServiceSource;
     [SerializeField] private MoneyView moneyView;
+
+    private IEconomyService economyService;
 
     public void Initialize()
     {
-        moneyView.UpdateMoney(economy.GetMoney());
-        economy.OnMoneyChanged += moneyView.UpdateMoney;
+        economyService = economyServiceSource as IEconomyService;
+
+        moneyView.UpdateMoney(economyService.GetMoney());
+        economyService.OnMoneyChanged += moneyView.UpdateMoney;
     }
 
     private void OnDestroy()
     {
-        economy.OnMoneyChanged -= moneyView.UpdateMoney;
+        economyService.OnMoneyChanged -= moneyView.UpdateMoney;
     }
 }

@@ -808,7 +808,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 7374073399454954729}
   farmerBotPrefab: {fileID: 1032656621309333750, guid: 3cf57bace2d13e047ae4ff05685b1932, type: 3}
-  farmSettings: {fileID: 11400000, guid: 9844f37e234b40940a2305f9ce5f4188, type: 2}
   upgradeView: {fileID: 5367673532646588048}
 --- !u!65 &1593423611888604256
 BoxCollider:
@@ -896,7 +895,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Upgrade 100$
+  m_text: 'Upgrade 250
 
 '
   m_isRightToLeft: 0

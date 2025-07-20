@@ -3,7 +3,7 @@ using System;
 
 using UnityEngine;
 
-public class EconomyController : MonoBehaviour
+public class EconomyService : MonoBehaviour, IEconomyService
 {
     private EconomyModel model;
 
