@@ -14,7 +14,7 @@ public class BakeryController : MonoBehaviour
         this.inventoryService = inventoryService;
         model = new BakeryModel();
 
-        //StartCoroutine(ProcessingLoop());
+        StartCoroutine(ProcessingLoop());
     }
 
     private IEnumerator ProcessingLoop()

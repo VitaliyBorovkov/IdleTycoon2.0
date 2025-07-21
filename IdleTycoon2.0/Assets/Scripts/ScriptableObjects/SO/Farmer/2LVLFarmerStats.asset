@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 2
   moveSpeed: 20
-  harvestTime: 1
+  xpPerCycle: 7
+  moneyPerCycle: 3
+  harvestTime: 1.5
   grainPerHarvest: 2

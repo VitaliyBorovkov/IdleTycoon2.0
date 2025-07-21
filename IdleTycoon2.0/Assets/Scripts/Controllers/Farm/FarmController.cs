@@ -60,7 +60,7 @@ public class FarmController : MonoBehaviour
 
         GameObject botGO = Instantiate(farmerBotPrefab, view.GetBotSpawnPoint().position, Quaternion.identity);
         farmerBot = botGO.GetComponent<FarmerBotController>();
-        farmerBot.Initialize(millPoint, model, playerLevelService, inventoryService);
+        farmerBot.Initialize(millPoint, model, playerLevelService, inventoryService, economyService);
     }
 
     private void UpdateUpgradeUI()

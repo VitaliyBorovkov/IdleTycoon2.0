@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grainPerBatch: 3
   flourPerBatch: 2
-  craftTime: 2
+  craftTime: 10

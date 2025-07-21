@@ -15,4 +15,4 @@ MonoBehaviour:
   interval: 5
   breadPerSale: 1
   moneyPerBread: 25
-  xpPerBread: 10
+  xpPerBread: 25

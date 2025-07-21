@@ -31,7 +31,7 @@ public class BreadSellController : MonoBehaviour
                 economyService.AddMoney(settings.breadPerSale * settings.moneyPerBread);
                 playerLevelService.AddXP(settings.breadPerSale * settings.xpPerBread);
 
-                Debug.Log($"[Sale] Sold {settings.breadPerSale} bread for {settings.breadPerSale * settings.moneyPerBread}$ (+{settings.breadPerSale * settings.xpPerBread} XP)");
+                Debug.Log($"[Sale] Sold {settings.breadPerSale} bread for {settings.breadPerSale * settings.moneyPerBread} (+{settings.breadPerSale * settings.xpPerBread} XP)");
             }
         }
     }

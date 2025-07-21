@@ -25,7 +25,6 @@ public class EconomyService : MonoBehaviour, IEconomyService
         Debug.Log($"[Economy] Money added: +{amount}, total = {model.Money}");
 
         OnMoneyChanged?.Invoke(model.Money);
-
     }
 
     public bool TrySpendMoney(int amount)

@@ -1795,6 +1795,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 49.919, y: 0, z: 0}
+--- !u!114 &1026132573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8611669450184215690, guid: c6d9052f21e86c646b0780a00c0aa862, type: 3}
+  m_PrefabInstance: {fileID: 8370120112937121069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472a907a915a2df419489dcba3b8b5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035577394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,9 +2529,11 @@ MonoBehaviour:
   economyService: {fileID: 62916534}
   inventoryService: {fileID: 1561494864}
   economyUIController: {fileID: 1604296385}
+  millController: {fileID: 1026132573}
   playerLevelService: {fileID: 2035589499}
   xpBarController: {fileID: 1494009072}
   inventoryPanelController: {fileID: 2105288699}
+  bakeryController: {fileID: 4302747185810155400}
   breadSellController: {fileID: 559868091}
   millerBotController: {fileID: 1089049305}
   bakeryPoint: {fileID: 1654215610}
@@ -3406,6 +3419,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6267574820644700633, guid: bc9eb519d0d604645aabb4e608130732, type: 3}
   m_PrefabInstance: {fileID: 4302747185810155398}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4302747185810155400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5425143371553635192, guid: bc9eb519d0d604645aabb4e608130732, type: 3}
+  m_PrefabInstance: {fileID: 4302747185810155398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7eb224f79b3897408608aa8c751eba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8370120112937121069
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,25 +9,27 @@ public class FarmerBotController : MonoBehaviour
     private Transform millPoint;
     private IPlayerLevelService playerLevelService;
     private IInventoryService inventoryService;
-    private FarmerStats currentStats;
+    private IEconomyService economyService;
+    private FarmerStats settings;
     private FarmModel farmModel;
 
     private Vector3 startPoint;
 
     public void Initialize(Transform millPoint, FarmModel farmModel, IPlayerLevelService playerLevelService,
-        IInventoryService inventoryService)
+        IInventoryService inventoryService, IEconomyService economyService)
     {
         this.millPoint = millPoint;
         this.playerLevelService = playerLevelService;
         this.inventoryService = inventoryService;
+        this.economyService = economyService;
         this.farmModel = farmModel;
 
         startPoint = transform.position;
 
         int level = farmModel.Level;
 
-        currentStats = GetStatsForLevel(level);
-        if (currentStats == null)
+        settings = GetStatsForLevel(level);
+        if (settings == null)
         {
             Debug.LogError($"[FarmerBot] Failed to initialize stats for level {level}. Destroying bot.");
             Destroy(gameObject);
@@ -50,8 +52,8 @@ public class FarmerBotController : MonoBehaviour
 
     public void UpgradeStats(int newLevel)
     {
-        currentStats = GetStatsForLevel(newLevel);
-        if (currentStats == null)
+        settings = GetStatsForLevel(newLevel);
+        if (settings == null)
         {
             Debug.LogError($"[FarmerBot] No stats found for level {newLevel}");
         }
@@ -62,31 +64,27 @@ public class FarmerBotController : MonoBehaviour
         while (true)
         {
 
-            yield return new WaitForSeconds(currentStats.harvestTime);
+            yield return new WaitForSeconds(settings.harvestTime);
 
-            Debug.Log($"[FarmerBot] Produced {currentStats.grainPerHarvest} grain(s). Moving to mill...");
+            Debug.Log($"[FarmerBot] Produced {settings.grainPerHarvest} grain(s). Moving to mill...");
 
 
             yield return StartCoroutine(MoveTo(millPoint.position));
 
             yield return new WaitForSeconds(0.5f);
             Debug.Log($"[FarmerBot] Delivered to mill.");
-            playerLevelService.AddXP(5);
-
-            inventoryService.Add(ItemType.Grain, currentStats.grainPerHarvest);
+            playerLevelService.AddXP(settings.xpPerCycle);
+            economyService.AddMoney(settings.moneyPerCycle);
+            inventoryService.Add(ItemType.Grain, settings.grainPerHarvest);
             yield return StartCoroutine(MoveTo(startPoint));
         }
-
     }
 
     private IEnumerator MoveTo(Vector3 target)
     {
         while (Vector3.Distance(transform.position, target) > 0.05f)
         {
-
-            transform.position = Vector3.MoveTowards(transform.position, target, currentStats.moveSpeed *
-                Time.deltaTime);
-
+            transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
             yield return null;
         }
     }

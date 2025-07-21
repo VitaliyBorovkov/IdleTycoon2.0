@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   craftTime: 4
-  grainPerBatch: 3
+  xpPerCycle: 15
+  moneyPerCycle: 7
   flourPerBatch: 2
+  grainPerBatch: 3

@@ -4,7 +4,7 @@ using UnityEngine;
 public class MillerSettings : ScriptableObject
 {
     public float moveSpeed = 2f;
-    public float craftTime = 2f;
-    public int grainPerBatch = 3;
-    public int flourPerBatch = 2;
+    public int xpForDelivered = 25;
+    public int moneyForDelivered = 1;
+    public int flourCarryAmount = 2;
 }
