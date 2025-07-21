@@ -2169,6 +2169,10 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 11400000, guid: 5c54070adae17924fb2edd9bf11a7075, type: 2}
+    - target: {fileID: 2207060211279889627, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
+      propertyPath: bakeryController
+      value: 
+      objectReference: {fileID: 4302747185810155400}
     - target: {fileID: 3259830998401532240, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.3723

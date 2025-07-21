@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         inventoryPanelController.Initialize();
         bakeryController.Initialize(inventoryService);
         breadSellController.Initialize(inventoryService, economyService, playerLevelService);
-        millerBotController.Initialize(inventoryService, bakeryPoint, playerLevelService, economyService);
+        millerBotController.Initialize(inventoryService, bakeryPoint, playerLevelService, economyService, bakeryController);
         bakerBotController.Initialize(inventoryService, warehousePoint, playerLevelService, economyService);
     }
 }

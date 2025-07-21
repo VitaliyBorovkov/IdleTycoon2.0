@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: MillerSettings
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  craftTime: 4
-  xpPerCycle: 15
-  moneyPerCycle: 7
-  flourPerBatch: 2
-  grainPerBatch: 3
+  xpForDelivered: 15
+  moneyForDelivered: 5
+  flourCarryAmount: 2

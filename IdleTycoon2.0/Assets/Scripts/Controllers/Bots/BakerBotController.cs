@@ -29,12 +29,12 @@ public class BakerBotController : MonoBehaviour
     {
         while (true)
         {
-            while (inventoryService.GetAmount(ItemType.Flour) < settings.breadCarryAmount)
+            while (inventoryService.GetAmount(ItemType.Bread) < settings.breadCarryAmount)
             {
                 yield return new WaitForSeconds(0.5f);
             }
 
-            bool success = inventoryService.TryConsume(ItemType.Flour, settings.breadCarryAmount);
+            bool success = inventoryService.TryConsume(ItemType.Bread, settings.breadCarryAmount);
             if (!success)
             {
                 Debug.LogWarning("[BakerBot] Failed to consume flour after check.");

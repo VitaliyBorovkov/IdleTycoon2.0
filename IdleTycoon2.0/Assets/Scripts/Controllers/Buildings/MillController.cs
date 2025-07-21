@@ -5,6 +5,7 @@ using UnityEngine;
 public class MillController : MonoBehaviour
 {
     [SerializeField] private MillSettings settings;
+
     private IInventoryService inventoryService;
     private MillModel model;
 

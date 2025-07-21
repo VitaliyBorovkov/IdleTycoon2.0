@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flourPerBatch: 3
   breadPerBatch: 1
-  craftTime: 10
+  craftTime: 5
