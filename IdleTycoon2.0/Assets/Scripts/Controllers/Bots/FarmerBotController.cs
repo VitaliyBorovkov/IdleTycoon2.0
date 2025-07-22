@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class FarmerBotController : MonoBehaviour, IBotSave
+public class FarmerBotController : BotBase, IBotSave
 {
     [SerializeField] private FarmerStatsDatabase statsDatabase;
 
@@ -37,8 +37,6 @@ public class FarmerBotController : MonoBehaviour, IBotSave
         isInitialized = true;
 
         int level = farmModel.Level;
-
-        Debug.Log($"[FarmerBot] Initialize called. Farm Level = {level}, StatsDatabase.Count = {statsDatabase.levels.Length}");
 
         settings = GetStatsForLevel(level);
         if (settings == null)
@@ -91,8 +89,6 @@ public class FarmerBotController : MonoBehaviour, IBotSave
 
     private IEnumerator WorkLoop()
     {
-        Debug.Log($"[{GetType().Name}] WorkLoop started");
-
         while (true)
         {
 
@@ -100,23 +96,14 @@ public class FarmerBotController : MonoBehaviour, IBotSave
 
             Debug.Log($"[FarmerBot] Produced {settings.grainPerHarvest} grain(s). Moving to mill...");
 
-            yield return StartCoroutine(MoveTo(millPoint.position));
+            yield return StartCoroutine(MoveTo(millPoint.position, settings.moveSpeed));
 
             yield return new WaitForSeconds(0.5f);
             Debug.Log($"[FarmerBot] Delivered to mill.");
             playerLevelService.AddXP(settings.xpPerCycle);
             economyService.AddMoney(settings.moneyPerCycle);
             inventoryService.Add(ItemType.Grain, settings.grainPerHarvest);
-            yield return StartCoroutine(MoveTo(startPoint));
-        }
-    }
-
-    private IEnumerator MoveTo(Vector3 target)
-    {
-        while (Vector3.Distance(transform.position, target) > 0.05f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
-            yield return null;
+            yield return StartCoroutine(MoveTo(startPoint, settings.moveSpeed));
         }
     }
 

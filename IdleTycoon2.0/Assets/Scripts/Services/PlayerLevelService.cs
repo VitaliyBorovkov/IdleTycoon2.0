@@ -23,13 +23,10 @@ public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
     {
         bool leveledUp = model.TryAddXP(amount, out bool levelUp);
 
-        Debug.Log($"[PlayerLevel] Gained {amount} XP. Total XP: {CurrentXP}");
-
         OnXPChanged?.Invoke();
 
         if (levelUp)
         {
-            Debug.Log($"[PlayerLevel] Leveled up! New level: {CurrentLevel}");
             OnLevelUp?.Invoke(CurrentLevel);
         }
     }
@@ -58,13 +55,11 @@ public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
     {
         model.SetXP(xp);
         OnXPChanged?.Invoke();
-        Debug.Log($"[PlayerLevel] XP set to {xp}");
     }
 
     public void SetLevel(int level)
     {
         model.SetLevel(level);
         OnLevelUp?.Invoke(level);
-        Debug.Log($"[PlayerLevel] Level set to {level}");
     }
 }

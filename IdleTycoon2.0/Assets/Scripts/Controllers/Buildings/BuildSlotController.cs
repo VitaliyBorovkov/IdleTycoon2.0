@@ -53,7 +53,6 @@ public class BuildSlotController : MonoBehaviour
     {
         isUnlocked = true;
         playerLevelService.OnLevelUp -= CheckUnlock;
-        Debug.Log($"[BuildSlot] Unlocked at level {requiredLevel}");
     }
 
     private void OnMouseDown()
@@ -89,7 +88,6 @@ public class BuildSlotController : MonoBehaviour
         FindObjectOfType<GameManager>().RegisterBuilding(currentFarm);
 
         IsOccupied = true;
-        Debug.Log($"[BuildSlot] Farm built at slot (requiredLevel = {requiredLevel})");
     }
 
     public FarmController GetFarm()

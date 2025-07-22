@@ -62,20 +62,12 @@ public class GameManager : MonoBehaviour
         bakeryController.Initialize(inventoryService);
         xpBarController.Initialize(playerLevelService);
         breadSellController.Initialize(inventoryService, economyService, playerLevelService);
-        //bakerBotController.Initialize(inventoryService, warehousePoint, playerLevelService, economyService);
-        //millerBotController.Initialize(inventoryService, bakeryPoint, playerLevelService, economyService, bakeryController);
-
-        RegisterBot(millerBotController);
-        RegisterBot(bakerBotController);
-
-        Debug.Log("[GameManager] SaveController initialized");
     }
 
     public void SaveGame()
     {
         if (saveController == null)
         {
-            Debug.LogWarning("[GameManager] SaveController is not initialized.");
             return;
         }
 
@@ -102,7 +94,6 @@ public class GameManager : MonoBehaviour
     {
         if (loadController == null)
         {
-            Debug.LogWarning("[GameManager] LoadController is not initialized.");
             return;
         }
 
@@ -114,7 +105,6 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("[GameManager] Saving game (Editor mode)");
             SaveGame();
         }
 

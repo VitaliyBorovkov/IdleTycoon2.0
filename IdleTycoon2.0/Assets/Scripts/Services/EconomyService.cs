@@ -13,10 +13,8 @@ public class EconomyService : MonoBehaviour, IEconomyService
     public void Initialize()
     {
         model = new EconomyModel(startMoney: 1000);
-        Debug.Log($"[Economy] Game started with {model.Money}");
 
         OnMoneyChanged?.Invoke(model.Money);
-
     }
 
     public void AddMoney(int amount)
@@ -48,9 +46,7 @@ public class EconomyService : MonoBehaviour, IEconomyService
     public void SetMoney(int amount)
     {
         model.Money = amount;
-        Debug.Log($"[Economy] Money set to: {model.Money}");
         OnMoneyChanged?.Invoke(model.Money);
     }
-
 }
 

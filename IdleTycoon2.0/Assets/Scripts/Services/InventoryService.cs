@@ -44,7 +44,6 @@ public class InventoryService : MonoBehaviour, IInventoryService
     public void SetItem(ItemType type, int amount)
     {
         model.SetAmount(type, amount);
-        Debug.Log($"[Inventory] Set {type} = {amount}");
         OnInventoryChanged?.Invoke();
     }
 }

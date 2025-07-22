@@ -17,6 +17,9 @@ public class EconomyUIController : MonoBehaviour
 
     private void OnDestroy()
     {
-        economyService.OnMoneyChanged -= moneyView.UpdateMoney;
+        if (economyService != null)
+        {
+            economyService.OnMoneyChanged -= moneyView.UpdateMoney;
+        }
     }
 }

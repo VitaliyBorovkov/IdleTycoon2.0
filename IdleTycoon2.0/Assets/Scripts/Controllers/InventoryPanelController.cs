@@ -38,12 +38,13 @@ public class InventoryPanelController : MonoBehaviour
         view.SetActive(isVisible);
 
         if (isVisible)
+        {
             UpdateInventory();
+        }
     }
 
     private void OnDestroy()
     {
-        inventoryService.OnInventoryChanged -= UpdateInventory;
         inventoryService.OnInventoryChanged -= HandleInventoryChanged;
     }
 }

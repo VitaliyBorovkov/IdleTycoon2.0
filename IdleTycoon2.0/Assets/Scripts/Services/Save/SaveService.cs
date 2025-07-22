@@ -24,16 +24,6 @@ public class SaveService
 
         string json = File.ReadAllText(SaveFilePath);
         SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-        Debug.Log("[SaveService] Game loaded successfully.");
         return saveData;
-    }
-
-    public void DeleteSave()
-    {
-        if (File.Exists(SaveFilePath))
-        {
-            File.Delete(SaveFilePath);
-            Debug.Log("[SaveService] Save file deleted.");
-        }
     }
 }

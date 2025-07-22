@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class MillerBotController : MonoBehaviour, IBotSave
+public class MillerBotController : BotBase, IBotSave
 {
     [SerializeField] private MillerSettings settings;
 
@@ -46,7 +46,7 @@ public class MillerBotController : MonoBehaviour, IBotSave
 
             Debug.Log($"[MillerBot] Picked up {settings.flourCarryAmount} flour. Moving to bakery...");
 
-            yield return StartCoroutine(MoveTo(bakeryPoint.position));
+            yield return StartCoroutine(MoveTo(bakeryPoint.position, settings.moveSpeed));
             yield return new WaitForSeconds(0.5f);
 
             inventoryService.Add(ItemType.Flour, settings.flourCarryAmount);
@@ -59,16 +59,7 @@ public class MillerBotController : MonoBehaviour, IBotSave
             Debug.Log($"[MillerBot] Delivered flour. XP +{settings.xpForDelivered}, Money +{settings.moneyForDelivered}");
 
             Debug.Log($"[MillerBot] Delivered flour to bakery. Returning...");
-            yield return StartCoroutine(MoveTo(startPoint));
-        }
-    }
-
-    private IEnumerator MoveTo(Vector3 target)
-    {
-        while (Vector3.Distance(transform.position, target) > 0.05f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
-            yield return null;
+            yield return StartCoroutine(MoveTo(startPoint, settings.moveSpeed));
         }
     }
 

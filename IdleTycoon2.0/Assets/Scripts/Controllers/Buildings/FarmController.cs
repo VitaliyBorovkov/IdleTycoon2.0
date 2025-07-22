@@ -98,12 +98,6 @@ public class FarmController : MonoBehaviour, IBuildingSave
 
     private void HandleUpgradeClick()
     {
-        if (farmModel.Level >= farmSettings.MaxFarmLevel)
-        {
-            Debug.Log("[Farm] Max level reached.");
-            return;
-        }
-
         var next = GetNextLevelSettings();
 
         if (playerLevelService.CurrentLevel < next.requiredPlayerLevel)
@@ -159,22 +153,10 @@ public class FarmController : MonoBehaviour, IBuildingSave
     {
         farmModel.SetLevel(newLevel);
 
-        //if (farmerBot == null)
-        //{
-        //    Debug.LogWarning("[FarmController] Farmer bot not found after load. Respawning...");
-        //    SpawnFarmerBot(millPoint);
-        //}
-
         if (farmerBot != null)
         {
             farmerBot.UpgradeStats(newLevel);
         }
-        else
-        {
-            Debug.LogWarning("[FarmController] Farmer bot is null. Skipping bot upgrade.");
-        }
-
-        Debug.Log($"[FarmController] Force set level to {newLevel}");
     }
 
     public void SetSkipBotSpawn(bool value)

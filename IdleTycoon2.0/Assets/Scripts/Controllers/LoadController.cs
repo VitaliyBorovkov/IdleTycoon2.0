@@ -92,8 +92,6 @@ public class LoadController
         inventory.SetItem(ItemType.Flour, data.inventoryData.flour);
         inventory.SetItem(ItemType.Bread, data.inventoryData.bread);
 
-        Debug.Log("[LoadController] Basic game state loaded.");
-
         foreach (var mono in GameObject.FindObjectsOfType<MonoBehaviour>())
         {
             if (mono is IBuildingSave && mono.name.Contains("(Clone)"))
@@ -118,9 +116,6 @@ public class LoadController
             {
                 loadedFarms[building.slotIndex] = farmController;
             }
-
-
-            Debug.Log($"[LoadController] Farm loaded in slot {building.slotIndex} at level {building.level}");
         }
 
         foreach (var bot in data.botsData)
@@ -159,7 +154,6 @@ public class LoadController
                     {
                         if (GameObject.FindObjectOfType<MillerBotController>() != null)
                         {
-                            Debug.Log("[LoadController] MillerBot already exists, skipping.");
                             break;
                         }
 
@@ -173,7 +167,6 @@ public class LoadController
                     {
                         if (GameObject.FindObjectOfType<BakerBotController>() != null)
                         {
-                            Debug.Log("[LoadController] BakerBot already exists, skipping.");
                             break;
                         }
 

@@ -23,7 +23,7 @@ public class XPBarController : MonoBehaviour
 
     private void HandleLevelUp(int newLevel)
     {
-        HandleXPChanged();
+        UpdateUI();
     }
 
     private void UpdateUI()
