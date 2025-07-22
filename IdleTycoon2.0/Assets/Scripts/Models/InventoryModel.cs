@@ -24,4 +24,9 @@ public class InventoryModel
         storage[type] -= amount;
         return true;
     }
+
+    public void SetAmount(ItemType type, int amount)
+    {
+        storage[type] = amount;
+    }
 }

@@ -7,4 +7,5 @@ public interface IEconomyService
     void AddMoney(int amount);
     bool TrySpendMoney(int amount);
     int GetMoney();
+    void SetMoney(int amount);
 }

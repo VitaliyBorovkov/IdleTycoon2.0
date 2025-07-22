@@ -13,4 +13,6 @@ public interface IPlayerLevelService
     int GetRequiredXPForNextLevel();
     int RequiredXPForCurrentLevel();
     int CurrentXPInLevel();
+    void SetLevel(int level);
+    void SetXP(int xp);
 }

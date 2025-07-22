@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class BakerBotController : MonoBehaviour
+public class BakerBotController : MonoBehaviour, IBotSave
 {
     [SerializeField] private BakerSettings settings;
 
@@ -62,5 +62,14 @@ public class BakerBotController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public BotData GetBotData()
+    {
+        return new BotData
+        {
+            botType = "BakerBot",
+            botLevel = 0,
+        };
     }
 }

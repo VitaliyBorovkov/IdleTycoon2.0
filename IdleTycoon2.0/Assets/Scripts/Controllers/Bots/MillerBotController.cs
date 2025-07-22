@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class MillerBotController : MonoBehaviour
+public class MillerBotController : MonoBehaviour, IBotSave
 {
     [SerializeField] private MillerSettings settings;
 
@@ -70,5 +70,14 @@ public class MillerBotController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public BotData GetBotData()
+    {
+        return new BotData
+        {
+            botType = "MillerBot",
+            botLevel = 0,
+        };
     }
 }

@@ -34,23 +34,6 @@ public class BakeryController : MonoBehaviour
             if (model.IsProcessing)
                 continue;
 
-            //if (inventoryService.GetAmount(ItemType.Flour) >= settings.flourPerBatch)
-            //{
-            //    model.SetProcessing(true);
-
-            //    inventoryService.TryConsume(ItemType.Flour, settings.flourPerBatch);
-            //    Debug.Log($"[Bakery] Started baking bread from {settings.flourPerBatch} flour...");
-
-            //    yield return new WaitForSeconds(settings.craftTime);
-
-            //    inventoryService.Add(ItemType.Bread, settings.breadPerBatch);
-            //    Debug.Log($"[Bakery] Produced {settings.breadPerBatch} bread.");
-
-            //    model.SetProcessing(false);
-            //}
-
-            //yield return null;
-
             if (flourAvailableForCraft >= settings.flourPerBatch)
             {
                 model.SetProcessing(true);

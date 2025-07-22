@@ -25,7 +25,6 @@ public class FarmSettings : ScriptableObject
 
     public FarmLevelSettings GetNextLevelSettings(int currentLevel)
     {
-        //return GetSettingsForLevel(currentLevel + 1);
         if (currentLevel >= levels.Length)
         {
             Debug.LogWarning("[FarmSettings] No upgrade settings for current level.");

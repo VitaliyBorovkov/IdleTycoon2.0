@@ -46,9 +46,13 @@ public class PlayerLevelModel
         return CurrentXP - xpToNextLevel[CurrentLevel - 1];
     }
 
-    public void SetLevel(int level, int xp)
+    public void SetLevel(int level)
     {
         CurrentLevel = level;
+    }
+
+    public void SetXP(int xp)
+    {
         CurrentXP = xp;
     }
 

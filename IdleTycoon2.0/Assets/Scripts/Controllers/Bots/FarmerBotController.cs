@@ -2,31 +2,43 @@ using System.Collections;
 
 using UnityEngine;
 
-public class FarmerBotController : MonoBehaviour
+public class FarmerBotController : MonoBehaviour, IBotSave
 {
     [SerializeField] private FarmerStatsDatabase statsDatabase;
 
     private Transform millPoint;
-    private IPlayerLevelService playerLevelService;
-    private IInventoryService inventoryService;
-    private IEconomyService economyService;
-    private FarmerStats settings;
     private FarmModel farmModel;
+    private FarmerStats settings;
+
+    private IEconomyService economyService;
+    private IInventoryService inventoryService;
+    private IPlayerLevelService playerLevelService;
 
     private Vector3 startPoint;
 
+    private int botLevel;
+    private int slotIndex;
+
+    private bool isInitialized = false;
+
     public void Initialize(Transform millPoint, FarmModel farmModel, IPlayerLevelService playerLevelService,
-        IInventoryService inventoryService, IEconomyService economyService)
+        IInventoryService inventoryService, IEconomyService economyService, int botLevel, Vector3 spawnPoint,
+        int slotIndex)
     {
         this.millPoint = millPoint;
         this.playerLevelService = playerLevelService;
         this.inventoryService = inventoryService;
         this.economyService = economyService;
         this.farmModel = farmModel;
+        this.botLevel = botLevel;
+        this.startPoint = spawnPoint;
+        this.slotIndex = slotIndex;
 
-        startPoint = transform.position;
+        isInitialized = true;
 
         int level = farmModel.Level;
+
+        Debug.Log($"[FarmerBot] Initialize called. Farm Level = {level}, StatsDatabase.Count = {statsDatabase.levels.Length}");
 
         settings = GetStatsForLevel(level);
         if (settings == null)
@@ -36,7 +48,7 @@ public class FarmerBotController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(WorkLoop());
+        StartCoroutine(WaitForInitThenWorkLoop());
     }
 
     private FarmerStats GetStatsForLevel(int level)
@@ -47,27 +59,46 @@ public class FarmerBotController : MonoBehaviour
             return null;
         }
 
+        if (statsDatabase.levels[level] == null)
+        {
+            Debug.LogError($"[FarmerBot] Level {level} in FarmerStatsDatabase is NULL!");
+            return null;
+        }
+
         return statsDatabase.levels[level];
     }
 
-    public void UpgradeStats(int newLevel)
+    public void UpgradeStats(int level)
     {
-        settings = GetStatsForLevel(newLevel);
+        settings = GetStatsForLevel(level);
         if (settings == null)
         {
-            Debug.LogError($"[FarmerBot] No stats found for level {newLevel}");
+            Debug.LogError($"[FarmerBot] Stats not found for level {level}. Check FarmerStatsDatabase!");
+            Destroy(gameObject);
+            return;
         }
+    }
+
+    private IEnumerator WaitForInitThenWorkLoop()
+    {
+        while (!isInitialized || settings == null)
+        {
+            yield return null;
+        }
+
+        StartCoroutine(WorkLoop());
     }
 
     private IEnumerator WorkLoop()
     {
+        Debug.Log($"[{GetType().Name}] WorkLoop started");
+
         while (true)
         {
 
             yield return new WaitForSeconds(settings.harvestTime);
 
             Debug.Log($"[FarmerBot] Produced {settings.grainPerHarvest} grain(s). Moving to mill...");
-
 
             yield return StartCoroutine(MoveTo(millPoint.position));
 
@@ -87,5 +118,15 @@ public class FarmerBotController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public BotData GetBotData()
+    {
+        return new BotData
+        {
+            botType = "FarmerBot",
+            botLevel = botLevel,
+            slotIndex = this.slotIndex
+        };
     }
 }
