@@ -1,30 +1,40 @@
 using UnityEngine;
 
 
-public class FarmController : MonoBehaviour
+public class FarmController : MonoBehaviour, IBuildingSave
 {
     [SerializeField] private FarmView view;
     [SerializeField] private GameObject farmerBotPrefab;
     [SerializeField] private FarmUpgradeView upgradeView;
 
+    private Transform millPoint;
+    private FarmModel farmModel;
+
+    public FarmModel FarmModel => farmModel;
+    public Transform MillPoint => millPoint;
+
     private FarmSettings farmSettings;
-    private IPlayerLevelService playerLevelService;
-    private IInventoryService inventoryService;
     private IEconomyService economyService;
+    private IInventoryService inventoryService;
+    private IPlayerLevelService playerLevelService;
 
-
-    private FarmModel model;
     private FarmerBotController farmerBot;
+
+    private int slotIndex;
+
+    private bool skipBotSpawn = false;
 
     public FarmSettings GetSettings() => farmSettings;
 
     public void Initialize(Transform millPoint, IPlayerLevelService playerLevelService, IInventoryService inventoryService,
-        IEconomyService economyService, FarmSettings farmSettings)
+        IEconomyService economyService, FarmSettings farmSettings, int slotIndex)
     {
-        this.playerLevelService = playerLevelService;
-        this.inventoryService = inventoryService;
-        this.economyService = economyService;
+        this.slotIndex = slotIndex;
+        this.millPoint = millPoint;
         this.farmSettings = farmSettings;
+        this.economyService = economyService;
+        this.inventoryService = inventoryService;
+        this.playerLevelService = playerLevelService;
 
         if (playerLevelService.CurrentLevel < farmSettings.RequiredPlayerLevelForBuild)
         {
@@ -32,15 +42,11 @@ public class FarmController : MonoBehaviour
             return;
         }
 
-
-        //if (!economyService.TrySpendMoney(farmSettings.BuildCost))
-        //{
-        //    Debug.LogWarning("Not enough money to build farm");
-        //    return;
-        //}
-
-        model = new FarmModel();
-        SpawnFarmerBot(millPoint);
+        farmModel = new FarmModel();
+        if (!skipBotSpawn)
+        {
+            SpawnFarmerBot(millPoint);
+        }
 
         upgradeView.Initialize();
         upgradeView.OnUpgradeClicked += HandleUpgradeClick;
@@ -58,14 +64,20 @@ public class FarmController : MonoBehaviour
             return;
         }
 
-        GameObject botGO = Instantiate(farmerBotPrefab, view.GetBotSpawnPoint().position, Quaternion.identity);
+        Vector3 spawnPoint = view.GetBotSpawnPoint().position;
+        int botLevel = farmModel.Level;
+
+        GameObject botGO = Instantiate(farmerBotPrefab, spawnPoint, Quaternion.identity);
         farmerBot = botGO.GetComponent<FarmerBotController>();
-        farmerBot.Initialize(millPoint, model, playerLevelService, inventoryService, economyService);
+        farmerBot.Initialize(millPoint, farmModel, playerLevelService, inventoryService, economyService,
+        botLevel, spawnPoint, slotIndex);
+
+        FindObjectOfType<GameManager>().RegisterBot(farmerBot);
     }
 
     private void UpdateUpgradeUI()
     {
-        if (model.Level >= farmSettings.MaxFarmLevel)
+        if (farmModel.Level >= farmSettings.MaxFarmLevel)
         {
             upgradeView.SetButtonVisible(false);
             return;
@@ -76,7 +88,7 @@ public class FarmController : MonoBehaviour
         bool levelEnough = playerLevelService.CurrentLevel >= next.requiredPlayerLevel;
         bool moneyEnough = economyService.GetMoney() >= next.upgradeCost;
 
-        bool showButton = levelEnough /*|| moneyEnough*/;
+        bool showButton = levelEnough;
         bool enableButton = levelEnough && moneyEnough;
 
         upgradeView.SetButtonVisible(showButton);
@@ -84,10 +96,9 @@ public class FarmController : MonoBehaviour
         upgradeView.SetCost(next.upgradeCost);
     }
 
-
     private void HandleUpgradeClick()
     {
-        if (model.Level >= farmSettings.MaxFarmLevel)
+        if (farmModel.Level >= farmSettings.MaxFarmLevel)
         {
             Debug.Log("[Farm] Max level reached.");
             return;
@@ -107,23 +118,72 @@ public class FarmController : MonoBehaviour
             return;
         }
 
-        if (model.Level >= farmSettings.MaxFarmLevel)
+        if (farmModel.Level >= farmSettings.MaxFarmLevel)
         {
             Debug.Log("[Farm] Farm is already at max level.");
             return;
         }
 
-        model.Upgrade();
-        farmerBot.UpgradeStats(model.Level);
+        farmModel.Upgrade();
 
-        Debug.Log($"[Farm] Farm upgraded to level {model.Level}");
+        if (farmerBot != null)
+        {
+            farmerBot.UpgradeStats(farmModel.Level);
+        }
+        else
+        {
+            Debug.LogWarning("[FarmController] Farmer bot is null. Skipping bot upgrade.");
+        }
+
+        Debug.Log($"[Farm] Farm upgraded to level {farmModel.Level}");
 
         UpdateUpgradeUI();
     }
 
     private FarmLevelSettings GetNextLevelSettings()
     {
-        return farmSettings.GetNextLevelSettings(model.Level);
+        return farmSettings.GetNextLevelSettings(farmModel.Level);
     }
 
+    public BuildingData GetBuildingData()
+    {
+        return new BuildingData
+        {
+            slotIndex = slotIndex,
+            type = "Farm",
+            level = farmModel.Level
+        };
+    }
+
+    public void UpgradeToLevel(int newLevel)
+    {
+        farmModel.SetLevel(newLevel);
+
+        //if (farmerBot == null)
+        //{
+        //    Debug.LogWarning("[FarmController] Farmer bot not found after load. Respawning...");
+        //    SpawnFarmerBot(millPoint);
+        //}
+
+        if (farmerBot != null)
+        {
+            farmerBot.UpgradeStats(newLevel);
+        }
+        else
+        {
+            Debug.LogWarning("[FarmController] Farmer bot is null. Skipping bot upgrade.");
+        }
+
+        Debug.Log($"[FarmController] Force set level to {newLevel}");
+    }
+
+    public void SetSkipBotSpawn(bool value)
+    {
+        skipBotSpawn = value;
+    }
+
+    public void SetFarmerBot(FarmerBotController bot)
+    {
+        farmerBot = bot;
+    }
 }

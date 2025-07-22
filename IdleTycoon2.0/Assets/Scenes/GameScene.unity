@@ -1186,6 +1186,7 @@ MonoBehaviour:
   farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   farmSpawnPoint: {fileID: 500930512}
   millPoint: {fileID: 85089610}
+  FarmerSpawnPoint: {fileID: 83120131508621762, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
 --- !u!65 &500930514
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1413,6 +1414,7 @@ MonoBehaviour:
   farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   farmSpawnPoint: {fileID: 706934817}
   millPoint: {fileID: 85089610}
+  FarmerSpawnPoint: {fileID: 83120131508621762, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
 --- !u!65 &706934819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1541,6 +1543,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790314391}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &798201373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1032656621309333750, guid: 09fff716db259b24986cd75c0d2d2679, type: 3}
+  m_PrefabInstance: {fileID: 1820095701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &878765725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1868,7 @@ MonoBehaviour:
   farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   farmSpawnPoint: {fileID: 1035577395}
   millPoint: {fileID: 85089610}
+  FarmerSpawnPoint: {fileID: 83120131508621762, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
 --- !u!65 &1035577397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1892,7 +1900,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3154653132289172602, guid: 09fff716db259b24986cd75c0d2d2679, type: 3}
   m_PrefabInstance: {fileID: 1820095701}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 798201373}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d361399fe05bf2048b2bdb3c98bbdf78, type: 3}
@@ -1913,7 +1921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1122111559
 Transform:
   m_ObjectHideFlags: 0
@@ -2169,6 +2177,10 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 11400000, guid: 5c54070adae17924fb2edd9bf11a7075, type: 2}
+    - target: {fileID: 2207060211279889627, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
+      propertyPath: bakeryController
+      value: 
+      objectReference: {fileID: 4302747185810155400}
     - target: {fileID: 3259830998401532240, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.3723
@@ -2224,12 +2236,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2207060211279889627, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
   m_PrefabInstance: {fileID: 1330587139}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1335229329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f0966780e804e34bb5f8f95aa0354fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1335229329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1032656621309333750, guid: 44a8354c0ef92ee4784f26b501a678ec, type: 3}
+  m_PrefabInstance: {fileID: 1330587139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1494009071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,17 +2545,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   economyService: {fileID: 62916534}
   inventoryService: {fileID: 1561494864}
-  economyUIController: {fileID: 1604296385}
-  millController: {fileID: 1026132573}
   playerLevelService: {fileID: 2035589499}
+  millController: {fileID: 1026132573}
   xpBarController: {fileID: 1494009072}
-  inventoryPanelController: {fileID: 2105288699}
   bakeryController: {fileID: 4302747185810155400}
+  economyUIController: {fileID: 1604296385}
   breadSellController: {fileID: 559868091}
-  millerBotController: {fileID: 1089049305}
+  inventoryPanelController: {fileID: 2105288699}
+  millPoint: {fileID: 85089610}
   bakeryPoint: {fileID: 1654215610}
-  bakerBotController: {fileID: 1330587141}
+  farmPrefab: {fileID: 6775909277094573193, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
   warehousePoint: {fileID: 897929766}
+  bakerBotPrefab: {fileID: 1335229329}
+  farmerSpawnPoint: {fileID: 83120131508621762, guid: 4b7381591f904cc49a1aa73e28a7591f, type: 3}
+  farmerBotPrefab: {fileID: 1032656621309333750, guid: 3cf57bace2d13e047ae4ff05685b1932, type: 3}
+  millerBotPrefab: {fileID: 798201373}
+  bakerBotController: {fileID: 1330587141}
+  millerBotController: {fileID: 1089049305}
+  buildSlots:
+  - {fileID: 1035577396}
+  - {fileID: 706934818}
+  - {fileID: 500930513}
 --- !u!4 &1677535949
 Transform:
   m_ObjectHideFlags: 0

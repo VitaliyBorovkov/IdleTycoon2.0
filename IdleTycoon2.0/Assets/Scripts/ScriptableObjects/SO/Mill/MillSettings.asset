@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cf1b475207ac64eb5d0d159a8d8afd, type: 3}
   m_Name: MillSettings
   m_EditorClassIdentifier: 
-  grainPerBatch: 3
-  flourPerBatch: 2
-  craftTime: 10
+  grainPerBatch: 5
+  flourPerBatch: 3
+  craftTime: 5

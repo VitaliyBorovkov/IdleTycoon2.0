@@ -12,4 +12,10 @@ public class FarmModel
         Level++;
 
     }
+
+    public void SetLevel(int level)
+    {
+        Level = level;
+    }
+
 }

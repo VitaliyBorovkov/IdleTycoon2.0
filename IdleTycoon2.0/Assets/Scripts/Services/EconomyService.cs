@@ -45,5 +45,12 @@ public class EconomyService : MonoBehaviour, IEconomyService
 
     public int GetMoney() => model.Money;
 
+    public void SetMoney(int amount)
+    {
+        model.Money = amount;
+        Debug.Log($"[Economy] Money set to: {model.Money}");
+        OnMoneyChanged?.Invoke(model.Money);
+    }
+
 }
 

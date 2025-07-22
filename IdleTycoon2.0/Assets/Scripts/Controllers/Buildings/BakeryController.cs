@@ -9,12 +9,20 @@ public class BakeryController : MonoBehaviour
     private IInventoryService inventoryService;
     private BakeryModel model;
 
+    private int flourAvailableForCraft = 0;
+
     public void Initialize(IInventoryService inventoryService)
     {
         this.inventoryService = inventoryService;
         model = new BakeryModel();
 
         StartCoroutine(ProcessingLoop());
+    }
+
+    public void NotifyFlourDelivered(int amount)
+    {
+        flourAvailableForCraft += amount;
+        Debug.Log($"[Bakery] Received delivery: {amount} flour. Total available: {flourAvailableForCraft}");
     }
 
     private IEnumerator ProcessingLoop()
@@ -26,12 +34,22 @@ public class BakeryController : MonoBehaviour
             if (model.IsProcessing)
                 continue;
 
-            if (inventoryService.GetAmount(ItemType.Flour) >= settings.flourPerBatch)
+            if (flourAvailableForCraft >= settings.flourPerBatch)
             {
                 model.SetProcessing(true);
+                flourAvailableForCraft -= settings.flourPerBatch;
 
-                inventoryService.TryConsume(ItemType.Flour, settings.flourPerBatch);
-                Debug.Log($"[Bakery] Started processing flour...");
+                bool success = inventoryService.TryConsume(ItemType.Flour, settings.flourPerBatch);
+                if (!success)
+                {
+                    Debug.LogWarning("[Bakery] Flour marked as delivered but not found in inventory.");
+                    flourAvailableForCraft += settings.flourPerBatch;
+                    model.SetProcessing(false);
+                    yield return new WaitForSeconds(0.5f);
+                    continue;
+                }
+
+                Debug.Log($"[Bakery] Started baking bread from {settings.flourPerBatch} flour...");
 
                 yield return new WaitForSeconds(settings.craftTime);
 

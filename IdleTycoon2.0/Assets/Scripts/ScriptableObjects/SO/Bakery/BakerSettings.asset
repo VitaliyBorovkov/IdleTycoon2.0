@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: BakerSettings
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  craftTime: 6
-  xpPerCycle: 20
-  moneyPerCycle: 15
-  flourPerBatch: 3
-  breadPerBatch: 1
+  xpForDelivered: 20
+  moneyForDelivered: 10
+  breadCarryAmount: 1

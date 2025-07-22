@@ -19,15 +19,6 @@ public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
         model = new PlayerLevelModel(settings);
     }
 
-
-    private void Start()
-    {
-        // Временно устанавливаем 95 XP на 1 уровне
-        //model.SetLevel(4, 990);
-        //Debug.Log($"[PlayerLevel] TEMP: XP manually set to {CurrentXP} at Level {CurrentLevel}");
-    }
-
-
     public void AddXP(int amount)
     {
         bool leveledUp = model.TryAddXP(amount, out bool levelUp);
@@ -61,5 +52,19 @@ public class PlayerLevelService : MonoBehaviour, IPlayerLevelService
     public int CurrentXPInLevel()
     {
         return model.CurrentXPInLevel();
+    }
+
+    public void SetXP(int xp)
+    {
+        model.SetXP(xp);
+        OnXPChanged?.Invoke();
+        Debug.Log($"[PlayerLevel] XP set to {xp}");
+    }
+
+    public void SetLevel(int level)
+    {
+        model.SetLevel(level);
+        OnLevelUp?.Invoke(level);
+        Debug.Log($"[PlayerLevel] Level set to {level}");
     }
 }

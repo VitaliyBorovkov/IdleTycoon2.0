@@ -3,13 +3,12 @@ using UnityEngine;
 public class BuildSlotController : MonoBehaviour
 {
     [SerializeField] private int requiredLevel = 1;
-    [SerializeField] private int farmIndex = 0;
+    [SerializeField] private int farmIndex;
 
     [SerializeField] private MonoBehaviour playerLevelServiceSource;
     [SerializeField] private MonoBehaviour inventoryServiceSource;
     [SerializeField] private MonoBehaviour economyServiceSource;
 
-    //[SerializeField] private FarmSettingsDatabase settingsDatabase;
     [SerializeField] private FarmSettings farmSettings;
     [SerializeField] private GameObject farmPrefab;
     [SerializeField] private Transform farmSpawnPoint;
@@ -20,6 +19,8 @@ public class BuildSlotController : MonoBehaviour
     private IInventoryService inventoryService;
     private FarmController currentFarm;
     private bool isUnlocked = false;
+
+    public Transform FarmerSpawnPoint;
 
     public bool IsOccupied { get; private set; }
     public bool IsUnlocked => isUnlocked;
@@ -62,7 +63,7 @@ public class BuildSlotController : MonoBehaviour
             return;
         }
 
-        if (/*farmIndex >= settingsDatabase.levels.Length*/farmSettings == null)
+        if (farmSettings == null)
         {
             Debug.LogError($"[BuildSlot] Invalid farmIndex: {farmIndex}");
             return;
@@ -80,11 +81,12 @@ public class BuildSlotController : MonoBehaviour
             return;
         }
 
-        //var farmSettings = settingsDatabase.levels[farmIndex];
-
         GameObject farmGO = Instantiate(farmPrefab, farmSpawnPoint.position, Quaternion.identity);
         currentFarm = farmGO.GetComponent<FarmController>();
-        currentFarm.Initialize(millPoint, playerLevelService, inventoryService, economyService, farmSettings);
+        currentFarm.Initialize(millPoint, playerLevelService, inventoryService, economyService, farmSettings,
+            farmIndex);
+
+        FindObjectOfType<GameManager>().RegisterBuilding(currentFarm);
 
         IsOccupied = true;
         Debug.Log($"[BuildSlot] Farm built at slot (requiredLevel = {requiredLevel})");
@@ -93,5 +95,22 @@ public class BuildSlotController : MonoBehaviour
     public FarmController GetFarm()
     {
         return currentFarm;
+    }
+
+    public void BuildFromSave(GameObject farmPrefab, int level)
+    {
+        if (IsOccupied)
+            return;
+
+        GameObject farmGO = GameObject.Instantiate(farmPrefab, farmSpawnPoint.position, Quaternion.identity);
+        var farm = farmGO.GetComponent<FarmController>();
+        farm.SetSkipBotSpawn(true);
+        farm.Initialize(millPoint, playerLevelService, inventoryService, economyService, farmSettings, farmIndex);
+        farm.UpgradeToLevel(level);
+
+        currentFarm = farm;
+        IsOccupied = true;
+
+        FindObjectOfType<GameManager>().RegisterBuilding(farm);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class BakerBotController : MonoBehaviour
+public class BakerBotController : MonoBehaviour, IBotSave
 {
     [SerializeField] private BakerSettings settings;
 
@@ -29,12 +29,12 @@ public class BakerBotController : MonoBehaviour
     {
         while (true)
         {
-            while (inventoryService.GetAmount(ItemType.Flour) < settings.breadCarryAmount)
+            while (inventoryService.GetAmount(ItemType.Bread) < settings.breadCarryAmount)
             {
                 yield return new WaitForSeconds(0.5f);
             }
 
-            bool success = inventoryService.TryConsume(ItemType.Flour, settings.breadCarryAmount);
+            bool success = inventoryService.TryConsume(ItemType.Bread, settings.breadCarryAmount);
             if (!success)
             {
                 Debug.LogWarning("[BakerBot] Failed to consume flour after check.");
@@ -62,5 +62,14 @@ public class BakerBotController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, settings.moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public BotData GetBotData()
+    {
+        return new BotData
+        {
+            botType = "BakerBot",
+            botLevel = 0,
+        };
     }
 }

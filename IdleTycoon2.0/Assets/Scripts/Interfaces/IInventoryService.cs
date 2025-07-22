@@ -7,4 +7,5 @@ public interface IInventoryService
     int GetAmount(ItemType type);
     void Add(ItemType type, int amount);
     bool TryConsume(ItemType type, int amount);
+    void SetItem(ItemType type, int amount);
 }
